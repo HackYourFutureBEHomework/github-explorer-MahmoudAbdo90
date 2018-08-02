@@ -38,9 +38,10 @@
         const root = document.getElementById('root');
         fetchJSON(url)
         .then(data => {
-            const header = createAndAppend('header', root, {class: 'header', html: 'HYF Repositories'}); 
+            const header = createAndAppend('header', root, {class: 'header'});
+            const headerDiv = createAndAppend('div', header, {class: 'header-div', html: 'HYF Repositories'});
         
-        const select = createAndAppend('select', header, {class: 'select'});
+        const select = createAndAppend('select', headerDiv, {class: 'select'});
         const option = createAndAppend('option', select, {class: 'option', html: 'Select Repository'});
         data.forEach(repo => {
             createAndAppend('option', select, {class: 'option', html: repo.name});
@@ -48,6 +49,7 @@
         const container = createAndAppend('div', root, {class: 'container'});
         const leftBox = createAndAppend('div', container, {class: 'left-box'});
         const rightBox = createAndAppend('div', container, {class: 'right-box'});
+        
 
         select.addEventListener('change', ()=> {
             const repo = data.find(r=> r.name === select.value);
@@ -82,11 +84,12 @@
         const url = repo.contributors_url;
         fetchJSON(url)
         .then(contributors => {
-            const contributorList = createAndAppend('ul', parent, {class: 'cont-list', html: 'Contributors'});
+            createAndAppend('h5', parent, {class: 'title',  html: 'Contributors'});
+            const contributorList = createAndAppend('ul', parent, {class: 'cont-list'});
             contributors.forEach(contributor => {
                 const contributorli = createAndAppend('li', contributorList, {class: 'cont-name'});
                 createAndAppend('img', contributorli, {class: 'image', src: contributor.avatar_url});
-                const contributeData = createAndAppend('div', contributorList, {class: 'contribute-data'});
+                const contributeData = createAndAppend('div', contributorli, {class: 'contribute-data'});
                 const contributorName = createAndAppend('a', contributeData, {class: 'contributor-name', html: `${contributor.login}`, href: contributor.html_url});
                 const contributorbadge = createAndAppend('div', contributeData, {class: 'contributor-badge', html: `${contributor.contributions}`});
             });
