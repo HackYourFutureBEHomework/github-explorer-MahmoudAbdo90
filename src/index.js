@@ -71,8 +71,11 @@
         const details = createAndAppend('div', parent, {class: 'details'});
         const name = createAndAppend('h4', details, {html: 'Repository: '});
         createAndAppend('a', name, {class: 'name-url', html: `${repo.name}`, href: repo.html_url});
-        const description  = createAndAppend('h4', details, {html: 'Description: '});
-        createAndAppend('p', description, {html: `${repo.description }`});
+        if(repo.description !== null){
+            const description  = createAndAppend('h4', details, {html: 'Description: '});
+            createAndAppend('p', description, {html: `${repo.description }`});
+        } 
+
         const forks = createAndAppend('h4', details, {html: 'Forks: '});
         createAndAppend('p', forks, {html: ` ${repo.forks_count}`});
         const updated = createAndAppend('h4', details, {html: 'Updated: '});
