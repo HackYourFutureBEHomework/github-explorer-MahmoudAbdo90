@@ -16,7 +16,20 @@ class Repository {
     //
     // Replace this comment with your code
     //
-  }
+    const details = Util.createAndAppend('div', parent, {class: 'details'});
+    const name = Util.createAndAppend('h4', details, {html: 'Repository: '});
+    Util.createAndAppend('a', name, {class: 'name-url', html: `${this.data.name}`, href: this.data.html_url});
+    if(this.data.description !== null){
+        const description  = Util.createAndAppend('h4', details, {html: 'Description: '});
+        Util.createAndAppend('p', description, {html: `${this.data.description }`});
+    } 
+
+    const forks = Util.createAndAppend('h4', details, {html: 'Forks: '});
+    Util.createAndAppend('p', forks, {html: ` ${this.data.forks_count}`});
+    const updated = Util.createAndAppend('h4', details, {html: 'Updated: '});
+    Util.createAndAppend('p', updated, {html: `${this.data.updated_at}`});
+}
+  
 
   /**
    * Returns an array of contributors as a promise
